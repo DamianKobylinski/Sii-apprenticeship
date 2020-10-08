@@ -1,10 +1,12 @@
-import org.openqa.selenium.WebDriver;
+package pages;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class TabContentPage extends PageObject{
+public class TabContentBasePage extends BasePage {
 
     @FindBy(css = "#homefeatured li")
     private List<WebElement> productListElement;
@@ -12,8 +14,8 @@ public class TabContentPage extends PageObject{
     @FindBy(css = ".content_price .price")
     private List<WebElement> productListPriceElement;
 
-    public TabContentPage(WebDriver driver) {
-        super(driver);
+    public TabContentBasePage() {
+        PageFactory.initElements(getDriver(),this);
     }
 
     public List<WebElement> getProductListElement()

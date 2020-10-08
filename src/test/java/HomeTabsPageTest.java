@@ -2,23 +2,23 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
+import pages.HomeTabsBasePage;
+
+import static HelpfullMethods.HelpfullMethods.openUrl;
+import static pages.BasePage.quitDriver;
 
 class HomeTabsPageTest extends InitiationTestClass{
 
-    private static WebDriver driver;
-
+    private HomeTabsBasePage homeTabsPage = new HomeTabsBasePage();
     @BeforeAll
     public static void beforeSession()
     {
-        driver = createDriver();
-        driver.get(websiteURL);
+        openUrl(websiteURL);
     }
 
     @Test
     public void checkEqualElementHomeTabsPage()
     {
-        HomeTabsPage homeTabsPage = new HomeTabsPage(driver);
         Assertions.assertEquals("POPULAR",homeTabsPage.getHomePageTabsAElement().get(0).getText());
         Assertions.assertEquals("BEST SELLERS",homeTabsPage.getHomePageTabsAElement().get(1).getText());
     }
@@ -26,7 +26,7 @@ class HomeTabsPageTest extends InitiationTestClass{
     @AfterAll
     public static void afterSession()
     {
-        driver.quit();
+        quitDriver();
     }
 
 

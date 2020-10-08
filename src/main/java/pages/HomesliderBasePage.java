@@ -1,10 +1,12 @@
-import org.openqa.selenium.WebDriver;
+package pages;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class HomesliderPage extends PageObject {
+public class HomesliderBasePage extends BasePage {
 
     @FindBy(css = ".homeslider-container")
     private List<WebElement> homeslidersLiHomesliderElement;
@@ -12,8 +14,8 @@ public class HomesliderPage extends PageObject {
     @FindBy(css = "#htmlcontent_top ul li")
     private List<WebElement> homeslidersTopLiHomesliderElement;
 
-    public HomesliderPage(WebDriver driver) {
-        super(driver);
+    public HomesliderBasePage() {
+        PageFactory.initElements(getDriver(),this);
     }
 
     public int getHomeslidersLiElementSize()

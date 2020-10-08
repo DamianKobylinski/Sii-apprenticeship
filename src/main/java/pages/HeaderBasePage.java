@@ -1,10 +1,12 @@
-import org.openqa.selenium.WebDriver;
+package pages;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class HeaderPage extends PageObject {
+public class HeaderBasePage extends BasePage {
 
     @FindBy(css = "#header_logo")
     private WebElement logoHeaderElement;
@@ -16,17 +18,15 @@ public class HeaderPage extends PageObject {
     private List<WebElement> sfMenuElement;
 
 
-    public HeaderPage(WebDriver driver) {
-        super(driver);
+    public HeaderBasePage() {
+        PageFactory.initElements(getDriver(), this);
     }
 
-    public boolean checkIfLogoHeaderElementIsDisplayed()
-    {
+    public boolean checkIfLogoHeaderElementIsDisplayed() {
         return logoHeaderElement.isDisplayed();
     }
 
-    public String getFormHeaderElementAttribute()
-    {
+    public String getFormHeaderElementAttribute() {
         return formHeaderElement.getAttribute("method");
     }
 }
