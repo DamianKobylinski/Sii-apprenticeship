@@ -7,27 +7,23 @@ import pages.HomeTabsBasePage;
 import static HelpfullMethods.HelpfullMethods.openUrl;
 import static pages.BasePage.quitDriver;
 
-class HomeTabsPageTest extends InitiationTestClass{
+class HomeTabsPageTest extends InitiationTestClass {
 
     private HomeTabsBasePage homeTabsPage = new HomeTabsBasePage();
+
     @BeforeAll
-    public static void beforeSession()
-    {
+    public static void beforeSession() {
         openUrl(websiteURL);
     }
 
     @Test
-    public void checkEqualElementHomeTabsPage()
-    {
-        Assertions.assertEquals("POPULAR",homeTabsPage.getHomePageTabsAElement().get(0).getText());
-        Assertions.assertEquals("BEST SELLERS",homeTabsPage.getHomePageTabsAElement().get(1).getText());
+    public void checkEqualElementHomeTabsPage() {
+        Assertions.assertEquals("POPULAR", homeTabsPage.getHomePageTabsAElement().get(0).getText());
+        Assertions.assertEquals("BEST SELLERS", homeTabsPage.getHomePageTabsAElement().get(1).getText());
     }
 
     @AfterAll
-    public static void afterSession()
-    {
+    public static void afterSession() {
         quitDriver();
     }
-
-
 }
