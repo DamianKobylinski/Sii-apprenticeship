@@ -26,6 +26,11 @@ class HeaderPageTest extends InitiationTestClass {
         Assertions.assertEquals("get", headerPage.getFormHeaderElementAttribute());
     }
 
+    @Test
+    public void checkCartElementIfSomethingIsInIt(){
+
+    }
+
     @AfterAll
     public static void afterSession() {
         quitDriver();
