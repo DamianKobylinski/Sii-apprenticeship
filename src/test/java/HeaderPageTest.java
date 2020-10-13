@@ -2,37 +2,33 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
+import pages.HeaderBasePage;
 
-class HeaderPageTest extends InitiationTestClass{
+import static HelpfullMethods.HelpfullMethods.openUrl;
+import static pages.BasePage.quitDriver;
 
-    private static WebDriver driver;
+class HeaderPageTest extends InitiationTestClass {
 
+    private HeaderBasePage headerPage = new HeaderBasePage();
 
     @BeforeAll
-    public static void beforeSession()
-    {
-        driver = createDriver();
-        driver.get(websiteURL);
+    public static void beforeSession() {
+        openUrl(websiteURL);
     }
 
     @Test
     public void LogoHeaderElementIsDisplayedTest() {
-        HeaderPage headerPage = new HeaderPage(driver);
-        Assertions.assertEquals(true,headerPage.checkIfLogoHeaderElementIsDisplayed());
+        Assertions.assertTrue(headerPage.checkIfLogoHeaderElementIsDisplayed());
     }
 
     @Test
-    public void formHeaderElementAttributeMethodTest()
-    {
-        HeaderPage headerPage = new HeaderPage(driver);
-        Assertions.assertEquals("get",headerPage.getFormHeaderElementAttribute());
+    public void formHeaderElementAttributeMethodTest() {
+        Assertions.assertEquals("get", headerPage.getFormHeaderElementAttribute());
     }
 
     @AfterAll
-    public static void afterSession()
-    {
-        driver.quit();
+    public static void afterSession() {
+        quitDriver();
     }
 
 }

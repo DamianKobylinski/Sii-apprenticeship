@@ -2,37 +2,36 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
+import pages.HomesliderBasePage;
+
+import static HelpfullMethods.HelpfullMethods.openUrl;
+import static pages.BasePage.quitDriver;
 
 class HomesliderPageTest extends InitiationTestClass{
 
-    private static WebDriver driver;
-
+    private HomesliderBasePage homesliderPage = new HomesliderBasePage();
     @BeforeAll
     public static void beforeSession()
     {
-        driver = createDriver();
-        driver.get(websiteURL);
+        openUrl(websiteURL);
     }
 
     @Test
     public void checkHomesliderLiElementSize()
     {
-        HomesliderPage homesliderPage = new HomesliderPage(driver);
         Assertions.assertEquals(5,homesliderPage.getHomeslidersLiElementSize());
     }
 
     @Test
     public void checkHomesliderTopLiElementSize()
     {
-        HomesliderPage homesliderPage = new HomesliderPage(driver);
         Assertions.assertEquals(2,homesliderPage.getHomeslidersTopLiElementSize());
     }
 
     @AfterAll
     public static void afterSession()
     {
-        driver.quit();
+        quitDriver();
     }
 
 }

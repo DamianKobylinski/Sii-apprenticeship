@@ -1,20 +1,21 @@
-import org.openqa.selenium.WebDriver;
+package pages;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class HomeTabsPage extends PageObject {
+public class HomeTabsBasePage extends BasePage {
 
     @FindBy(css = "#home-page-tabs a")
     private List<WebElement> homepageTabsAElements;
 
-    public HomeTabsPage(WebDriver driver) {
-        super(driver);
+    public HomeTabsBasePage() {
+        PageFactory.initElements(getDriver(),this);
     }
 
-    public List<WebElement> getHomePageTabsAElement()
-    {
+    public List<WebElement> getHomePageTabsAElement() {
         return homepageTabsAElements;
     }
 }

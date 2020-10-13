@@ -3,29 +3,31 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import pages.TabContentBasePage;
+
+import static HelpfullMethods.HelpfullMethods.openUrl;
+import static pages.BasePage.quitDriver;
 
 class TabContentPageTest extends InitiationTestClass{
     private static WebDriver driver;
+    private TabContentBasePage tabContentPage = new TabContentBasePage();
 
     @BeforeAll
     public static void beforeSession()
     {
-        driver = createDriver();
-        driver.get(websiteURL);
+        openUrl(websiteURL);
     }
 
     @Test
     public void checkProductListElementSize()
     {
-        TabContentPage tabContentPage = new TabContentPage(driver);
-        Assertions.assertEquals(7,tabContentPage.getProductListElement().size());
-        Assertions.assertEquals(28,tabContentPage.getProductListPriceElement().size());
+        Assertions.assertEquals(7,tabContentPage.getProductListPriceElement().size());
     }
 
     @AfterAll
     public static void afterSession()
     {
-        driver.quit();
+        quitDriver();
     }
 
 }

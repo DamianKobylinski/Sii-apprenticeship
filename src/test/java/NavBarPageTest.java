@@ -4,30 +4,32 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pages.NavBarBasePage;
 
 import java.util.List;
 
+import static HelpfullMethods.HelpfullMethods.openUrl;
+import static pages.BasePage.quitDriver;
+
 class NavBarPageTest extends InitiationTestClass{
     private static WebDriver driver;
+    private NavBarBasePage navbarPage = new NavBarBasePage();
 
     @BeforeAll
     public static void beforeSession()
     {
-        driver = createDriver();
-        driver.get(websiteURL);
+        openUrl(websiteURL);
     }
 
     @Test
     public void NavBarImageIsDisplayedTest()
     {
-        NavBarPage navbarPage = new NavBarPage(driver);
-        Assertions.assertEquals(true,navbarPage.checkIfNavBarImageIsDisplayed());
+        Assertions.assertTrue(navbarPage.checkIfNavBarImageIsDisplayed());
     }
 
     @Test
     public void checkNavBarMenuElementsValue()
     {
-        NavBarPage navbarPage = new NavBarPage(driver);
         List<WebElement> listOfNavBarElements = navbarPage.getNavBarMenuElements();
         Assertions.assertEquals("Sign in",listOfNavBarElements.get(0).getText());
         Assertions.assertEquals("Contact us",listOfNavBarElements.get(1).getText());
@@ -36,6 +38,6 @@ class NavBarPageTest extends InitiationTestClass{
     @AfterAll
     public static void afterSession()
     {
-        driver.quit();
+        quitDriver();
     }
 }
