@@ -1,32 +1,39 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.function.Function;
 
-public class TabContentBasePage extends BasePage {
-// Locators
+public class MainPageTabContent extends BasePage {
+
+    final String BLOCKING_RIGHT_TAB_PRODUCTS_ELEMENTS_LOCATOR = "ul#homefeatured li div.right-block a[title='Add to cart']";
+    final By blockingRightTabProduct_locator = By.cssSelector(BLOCKING_RIGHT_TAB_PRODUCTS_ELEMENTS_LOCATOR);
+    // Locators
     @FindBy(css = ".right-block .content_price .price")
     private List<WebElement> productListPriceElement;
 
     @FindBy(css = ".right-block h5 a")
     private List<WebElement> takeNamesOfProductsElements;
 
-    @FindBy(css = ".ajax_block_product div .right-block .button-container .ajax_add_to_cart_button")
+    @FindBy(css = BLOCKING_RIGHT_TAB_PRODUCTS_ELEMENTS_LOCATOR)
     private List<WebElement> blockRightTabProductElements;
 
-    @FindBy(css = "#homefeatured li .product-container")
+    @FindBy(css = "#homefeatured li")
     private List<WebElement> liInHomeFeaturedElements;
 
-//    Methods
-    public TabContentBasePage() {
+    //    Methods
+    public MainPageTabContent() {
         PageFactory.initElements(getDriver(), this);
     }
 
@@ -60,6 +67,24 @@ public class TabContentBasePage extends BasePage {
                 return addToCartButtons.get(value);
             }
         });
-        checkOut.click();
+//        checkOut.click();
     }
+
+    public void clickOnAddToCart(int productNumber) {
+        WebDriverWait webDriverWait = new WebDriverWait(getDriver(), 10);
+        webDriverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(blockingRightTabProduct_locator, 1));
+        blockRightTabProductElements.get(productNumber).click();
+//        TODO dodaj czekanie na wyświetlenie całego popupa
+    }
+/*
+    public void zróbCośTam(){
+        pobierzList();
+        wybierzElemtn(1);
+        asdasd();
+        xcvxcv();
+    }
+
+    private void pobierzList() {
+    }
+*/
 }

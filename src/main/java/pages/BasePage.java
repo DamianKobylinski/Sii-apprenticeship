@@ -19,8 +19,9 @@ public class BasePage {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-//            System.setProperty("webdriver.gecko.driver","C:\\projekty\\frameworki\\Praktyki\\DamianSii-apprenticeship\\driver\\geckodriver.exe");
+            System.setProperty("webdriver.gecko.driver","C:\\projekty\\frameworki\\Praktyki\\DamianSii-apprenticeship\\driver\\geckodriver.exe");
             driver = new FirefoxDriver();
+            driver.manage().window().maximize();
         }
         return driver;
     }

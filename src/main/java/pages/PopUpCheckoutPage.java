@@ -1,3 +1,5 @@
+package pages;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,10 +12,10 @@ public class PopUpCheckoutPage {
 
     @FindBy(css = ".layer_cart_product_info span")
     private List<WebElement> cartProductInfoTitleOfTheProduct;
-//    ----------------TEST-------------------
+    //    ----------------TEST-------------------
     @FindBy(css = ".layer_cart_product_info #layer_cart_product_title")
     private WebElement cartProductNameElement;
-//    ----------------TEST-------------------
+    //    ----------------TEST-------------------
     @FindBy(css = ".button-container .button-medium")
     private static WebElement checkoutButtonElement;
 
@@ -34,8 +36,7 @@ public class PopUpCheckoutPage {
         return checkoutButtonElement;
     }
 
-    public WebElement getContinueShoppingElement()
-    {
+    public WebElement getContinueShoppingElement() {
         return continueShoppingElement;
     }
 
@@ -43,17 +44,15 @@ public class PopUpCheckoutPage {
         return cartProductInfoTitleOfTheProduct;
     }
 
-    public WebElement getEmptyCartTextDisplay()
-    {
+    public WebElement getEmptyCartTextDisplay() {
         return emptyCartTextDisplay;
     }
 
-    public String getTotalProductsPriceElement()
-    {
+    public String getTotalProductsPriceElement() {
         return totalProductsPriceElement.getText().replaceAll("[^\\P{Punct}-.]+", "");
     }
-    public WebElement getCartProductNameElement()
-    {
-        return cartProductNameElement;
+
+    public String getCartProductName() {
+        return cartProductNameElement.getText();
     }
 }
