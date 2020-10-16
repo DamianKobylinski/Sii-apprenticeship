@@ -10,7 +10,10 @@ public class PopUpCheckoutPage {
 
     @FindBy(css = ".layer_cart_product_info span")
     private List<WebElement> cartProductInfoTitleOfTheProduct;
-
+//    ----------------TEST-------------------
+    @FindBy(css = ".layer_cart_product_info #layer_cart_product_title")
+    private WebElement cartProductNameElement;
+//    ----------------TEST-------------------
     @FindBy(css = ".button-container .button-medium")
     private static WebElement checkoutButtonElement;
 
@@ -48,5 +51,9 @@ public class PopUpCheckoutPage {
     public String getTotalProductsPriceElement()
     {
         return totalProductsPriceElement.getText().replaceAll("[^\\P{Punct}-.]+", "");
+    }
+    public WebElement getCartProductNameElement()
+    {
+        return cartProductNameElement;
     }
 }
