@@ -2,20 +2,16 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.function.Function;
 
 public class MainPageTabContent extends BasePage {
+    private PopUpCheckoutPage popUpCheckoutPage = new PopUpCheckoutPage();
 
     final String BLOCKING_RIGHT_TAB_PRODUCTS_ELEMENTS_LOCATOR = "ul#homefeatured li div.right-block a[title='Add to cart']";
     final By blockingRightTabProduct_locator = By.cssSelector(BLOCKING_RIGHT_TAB_PRODUCTS_ELEMENTS_LOCATOR);
@@ -24,7 +20,7 @@ public class MainPageTabContent extends BasePage {
     private List<WebElement> productListPriceElement;
 
     @FindBy(css = ".right-block h5 a")
-    private List<WebElement> takeNamesOfProductsElements;
+    private List<WebElement> productName;
 
     @FindBy(css = BLOCKING_RIGHT_TAB_PRODUCTS_ELEMENTS_LOCATOR)
     private List<WebElement> blockRightTabProductElements;
@@ -41,50 +37,32 @@ public class MainPageTabContent extends BasePage {
         return productListPriceElement;
     }
 
-    public WebElement getProductListPriceElement(int value) {
-        return productListPriceElement.get(value);
+    public float getProductPrice(int productNumber) {
+        return Float.parseFloat(productListPriceElement.get(productNumber).getText().replace("$",""));
     }
 
     public List<WebElement> getBlockRightTabProductElements() {
         return blockRightTabProductElements;
     }
 
-    public void scrollToProductElementAndHoverMouseOnIt(int value) {
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", liInHomeFeaturedElements.get(value));
-        Actions action = new Actions(getDriver());
-        action.moveToElement(liInHomeFeaturedElements.get(value)).perform();
+    public String getProductName(int productNumber) {
+        return productName.get(productNumber).getText();
     }
 
-    public WebElement getNameOfProductElement(int value) {
-        return takeNamesOfProductsElements.get(value);
-    }
-
-    public void takeElementsValueAndClickOnAddToCartAction(Wait waitForPopUp, int value) {
-        WebElement checkOut = (WebElement) waitForPopUp.until(new Function<WebDriver, WebElement>() {
-            @Override
-            public WebElement apply(WebDriver driver) {
-                List<WebElement> addToCartButtons = getBlockRightTabProductElements();
-                return addToCartButtons.get(value);
-            }
-        });
-//        checkOut.click();
+    public void lisElementAddHoveredClass(int productNumber) {
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('class','ajax_block_product col-xs-12 col-sm-4 col-md-3 first-in-line first-item-of-tablet-line first-item-of-mobile-line hovered');", liInHomeFeaturedElements.get(productNumber));
     }
 
     public void clickOnAddToCart(int productNumber) {
         WebDriverWait webDriverWait = new WebDriverWait(getDriver(), 10);
         webDriverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(blockingRightTabProduct_locator, 1));
         blockRightTabProductElements.get(productNumber).click();
-//        TODO dodaj czekanie na wyświetlenie całego popupa
-    }
-/*
-    public void zróbCośTam(){
-        pobierzList();
-        wybierzElemtn(1);
-        asdasd();
-        xcvxcv();
     }
 
-    private void pobierzList() {
+    public void tabProductActions(int productNumber)
+    {
+        lisElementAddHoveredClass(0);
+        clickOnAddToCart(0);
+
     }
-*/
 }

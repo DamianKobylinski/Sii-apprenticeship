@@ -1,17 +1,11 @@
-import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import pages.MainPageTabContent;
 import pages.PopUpCheckoutPage;
 
-import java.time.Duration;
-
 import static HelpfullMethods.HelpfullMethods.openUrl;
-import static pages.BasePage.getDriver;
 import static pages.BasePage.quitDriver;
 
 class MainPageTabContentPageTest extends InitiationTestClass {
@@ -28,42 +22,16 @@ class MainPageTabContentPageTest extends InitiationTestClass {
     }
 
     @Test
-    public void clickAddToCartButtonAndCheckPriceOfElements() {
-/*
-        mainPageTabContentPage.zróbCośTam();
-        mainPageTabContentPage.poTymZróbCośInnego();
-
-        SoftAssertions softAssert = new SoftAssertions();
-        softAssert.assertThat(mainPageTabContentPage.getProductListPriceElement(1).getText()).isEqualTo(popUpCheckoutPage.getCartProductInfoOfTheProduct().get(3).getText());
-        softAssert.assertThat(productNameView).isEqualTo(productNamePopup);
-        softAssert.assertAll();
+    public void addToCartAction() {
+        float totalProductsPrice = 0;
 
 
-*/
+        totalProductsPrice += mainPageTabContentPage.getProductPrice(0);
+        mainPageTabContentPage.tabProductActions(0);
+        Assertions.assertEquals(mainPageTabContentPage.getProductName(0),popUpCheckoutPage.getCartProductName());
+        Assertions.assertEquals(totalProductsPrice, popUpCheckoutPage.getTotalProductsPrice());
+        popUpCheckoutPage.clickContinueShoppingButton();
 
-        Wait wait = new FluentWait<>(getDriver())
-                .withTimeout(Duration.ofMinutes(5))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(Exception.class);
-
-        if(popUpCheckoutPage.getEmptyCartTextDisplay().isDisplayed()) {
-
-            float totalProductsPrice = 0;
-
-            totalProductsPrice += Float.parseFloat(mainPageTabContentPage.getProductListPriceElement(0).getText().replace("$",""));
-            String productNameView = mainPageTabContentPage.getNameOfProductElement(1).getAttribute("title");
-            mainPageTabContentPage.scrollToProductElementAndHoverMouseOnIt(1);
-//            tabContentPage.takeElementsValueAndClickOnAddToCartAction(wait, 0);
-            mainPageTabContentPage.clickOnAddToCart(1);
-            String productNamePopup = popUpCheckoutPage.getCartProductName();
-            SoftAssertions softAssert = new SoftAssertions();
-            softAssert.assertThat(mainPageTabContentPage.getProductListPriceElement(1).getText()).isEqualTo(popUpCheckoutPage.getCartProductInfoOfTheProduct().get(3).getText());
-            softAssert.assertThat(productNameView).isEqualTo(productNamePopup);
-            softAssert.assertAll();
-
-            popUpCheckoutPage.getContinueShoppingElement().click();
-
-        }
     }
 
     @AfterAll

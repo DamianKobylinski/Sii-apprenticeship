@@ -32,12 +32,12 @@ public class PopUpCheckoutPage {
         PageFactory.initElements(getDriver(), this);
     }
 
-    public WebElement getCheckoutButtonElement() {
-        return checkoutButtonElement;
+    public void clickCheckoutButton() {
+        checkoutButtonElement.click();
     }
 
-    public WebElement getContinueShoppingElement() {
-        return continueShoppingElement;
+    public void clickContinueShoppingButton() {
+        continueShoppingElement.click();
     }
 
     public List<WebElement> getCartProductInfoOfTheProduct() {
@@ -48,8 +48,8 @@ public class PopUpCheckoutPage {
         return emptyCartTextDisplay;
     }
 
-    public String getTotalProductsPriceElement() {
-        return totalProductsPriceElement.getText().replaceAll("[^\\P{Punct}-.]+", "");
+    public float getTotalProductsPrice() {
+        return Float.parseFloat(totalProductsPriceElement.getText().replace("$", ""));
     }
 
     public String getCartProductName() {
