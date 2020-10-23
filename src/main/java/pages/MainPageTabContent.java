@@ -49,8 +49,8 @@ public class MainPageTabContent extends BasePage {
         return productName.get(productNumber).getText();
     }
 
-    public void lisElementAddHoveredClass(int productNumber) {
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('class','ajax_block_product col-xs-12 col-sm-4 col-md-3 first-in-line first-item-of-tablet-line first-item-of-mobile-line hovered');", liInHomeFeaturedElements.get(productNumber));
+    public void lisElementAddHoveredClass(float productNumber) {
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute('class','ajax_block_product col-xs-12 col-sm-4 col-md-3 first-in-line first-item-of-tablet-line first-item-of-mobile-line hovered');", liInHomeFeaturedElements.get((int) productNumber));
     }
 
     public void clickOnAddToCart(int productNumber) {
@@ -63,6 +63,5 @@ public class MainPageTabContent extends BasePage {
     {
         lisElementAddHoveredClass(0);
         clickOnAddToCart(0);
-
     }
 }

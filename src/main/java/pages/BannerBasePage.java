@@ -6,12 +6,12 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BannerBasePage extends BasePage {
     @FindBy(xpath = "//nav/span/strong")
-    private WebElement numberElement;
+    private static WebElement numberElement;
 
     public BannerBasePage() {
         PageFactory.initElements(getDriver(),this);
     }
-    public String getBannerText()
+    public static String getBannerText()
     {
         return numberElement.getText();
     }

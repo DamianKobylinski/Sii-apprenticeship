@@ -9,7 +9,7 @@ import static pages.BasePage.quitDriver;
 
 class BannerPageTest extends InitiationTestClass {
 
-    BannerBasePage bannerpage = new BannerBasePage();
+    static BannerBasePage bannerpage = new BannerBasePage();
 
     @BeforeAll
     public static void beforeSession() {
@@ -17,7 +17,7 @@ class BannerPageTest extends InitiationTestClass {
     }
 
     @Test
-    public void getTextFromBanner() {
+    public static void getTextFromBanner() {
         Assertions.assertEquals("0123-456-789", bannerpage.getBannerText());
     }
 
