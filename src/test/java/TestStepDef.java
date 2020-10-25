@@ -4,16 +4,21 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.BannerBasePage;
+import pages.ContactUsPage;
 import pages.MainPageTabContent;
 
 import static HelpfullMethods.HelpfullMethods.openUrl;
 import static pages.BasePage.quitDriver;
 
-public class TestStepDef{
-
+public class TestStepDef {
+    //  Pages
     BannerBasePage bannerBasePage = new BannerBasePage();
+    ContactUsPage contactUsPage = new ContactUsPage();
     MainPageTabContent mainPageTabContent = new MainPageTabContent();
+    //  TestPages
+    ContactUsPageTest contactUsPageTest = new ContactUsPageTest();
     MainPageTabContentPageTest mainPageTabContentPageTest = new MainPageTabContentPageTest();
+
 
     @Given("User open the home page")
     public void userOpenTheHomePage() {
@@ -29,10 +34,9 @@ public class TestStepDef{
     public void checkIfPhoneNumberIsCorrect() {
         BannerPageTest.getTextFromBanner();
     }
+
     @After
-    public void afterSession(){
-        quitDriver();
-    }
+    public void afterSession() { quitDriver(); }
 
     @When("Hover on the product")
     public void hoverOnTheProduct() {
@@ -62,5 +66,29 @@ public class TestStepDef{
     @And("^Click ([^\"]*) Add to Cart button$")
     public void clickProductNumberAddToCartButton(String number) {
         mainPageTabContent.clickOnAddToCart((int) Float.parseFloat(number));
+    }
+
+    @When("Enter the Contact Us Site")
+    public void enterTheContactUsSite() {
+        bannerBasePage.clickContactUsButton();
+    }
+
+    @Then("^Check ([^\"]*) Validation Element$")
+    public void checkFormElementValidationElement(String validationElement) {
+        switch (validationElement)
+        {
+            case "subjectHeading":
+                contactUsPageTest.checkSubjectHeadingElementValue();
+                break;
+            case "emailAddress":
+                contactUsPage.setEmailInputElement("damian@o2.com");
+                contactUsPage.clickSubmitMessageButton();
+                contactUsPageTest.alertWarningIsDisplayed();
+                break;
+            case "orderReference":
+                contactUsPage.setOrderReference("rwgqrqbqe");
+                contactUsPageTest.isOrderReferenceSet();
+                break;
+        }
     }
 }
